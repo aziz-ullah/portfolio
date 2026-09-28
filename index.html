@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aziz Ullah | Senior Python & AI Backend Developer</title>
+<meta name="description" content="Portfolio of Aziz Ullah - Senior Python Backend Developer specializing in Web Scraping, Data Engineering, FastAPI, and AI API Integration (OpenAI, Claude).">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0d1117;
+  --panel: #161b22;
+  --line: #30363d;
+  --text: #f0f6fc;
+  --mute: #8b949e;
+  --pass: #3fb950;
+  --vio: #a371f7;
+  --rose: #f85149;
+  --cyan: #38bdf8;
+  --accent: #58a6ff;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--ink);
+  color: var(--text);
+  font: 400 17px/1.65 'Bricolage Grotesque', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+:focus-visible { outline: 2px solid var(--pass); outline-offset: 3px; border-radius: 6px; }
+
+#bar {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0;
+  background: linear-gradient(90deg, var(--vio), var(--cyan), var(--pass));
+  z-index: 20;
+}
+#glow {
+  position: fixed; left: 50%; top: 30%; width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(163, 113, 247, 0.22), transparent);
+  transform: translate(-50%, -50%);
+  pointer-events: none; z-index: 0;
+  transition: left 0.4s ease-out, top 0.4s ease-out;
+}
+.blob {
+  position: fixed; border-radius: 50%; filter: blur(90px); opacity: 0.22;
+  z-index: 0; pointer-events: none;
+  animation: drift 18s ease-in-out infinite alternate;
+}
+.b1 { width: 380px; height: 380px; background: var(--pass); right: -120px; top: 35vh; }
+.b2 { width: 340px; height: 340px; background: var(--vio); left: -140px; bottom: 8vh; animation-delay: -8s; }
+@keyframes drift { to { transform: translate(-60px, -80px) scale(1.15); } }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 10;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px max(24px, calc(50% - 540px));
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  background: rgba(13, 17, 23, 0.75);
+  border-bottom: 1px solid rgba(48, 54, 61, 0.5);
+}
+nav b { font-weight: 800; font-size: 20px; letter-spacing: -0.02em; color: var(--text); }
+nav b span { color: var(--accent); }
+nav div { display: flex; gap: 24px; align-items: center; }
+nav a { color: var(--mute); font-size: 15px; font-weight: 600; transition: color 0.2s; }
+nav a:hover { color: var(--pass); }
+
+main { position: relative; z-index: 1; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 110px 24px 40px; }
+h2 { font-size: clamp(30px, 4.5vw, 44px); line-height: 1.1; letter-spacing: -0.03em; font-weight: 800; margin-bottom: 34px; }
+
+.hero { min-height: 90vh; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; padding-top: 100px; }
+.hero h1 { font-size: clamp(40px, 6vw, 76px); line-height: 1.02; letter-spacing: -0.04em; font-weight: 800; }
+.hero h1 span {
+  display: block;
+  background: linear-gradient(100deg, var(--accent), var(--vio), var(--pass), var(--accent));
+  background-size: 250% 100%;
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent; animation: sheen 7s linear infinite;
+}
+@keyframes sheen { to { background-position: 250% 0; } }
+.hero p { color: var(--mute); max-width: 48ch; margin: 24px 0 32px; font-size: 19px; line-height: 1.6; }
+.badge-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(63, 185, 80, 0.1); border: 1px solid rgba(63, 185, 80, 0.3);
+  color: var(--pass); padding: 6px 14px; border-radius: 999px;
+  font-size: 13px; font-weight: 600; margin-bottom: 20px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.badge-tag::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--pass); box-shadow: 0 0 10px var(--pass); }
+
+.btn-group { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 13px 24px; border-radius: 999px; font-weight: 600; text-decoration: none;
+  border: 1px solid var(--line); transition: transform 0.2s, background 0.2s, box-shadow 0.2s, border-color 0.2s;
+  cursor: pointer; background: var(--panel); color: var(--text); font-family: inherit; font-size: 16px;
+}
+.btn.main { background: var(--pass); color: #062412; border-color: var(--pass); font-weight: 800; }
+.btn.main:hover { background: #4ac25d; box-shadow: 0 10px 25px -5px rgba(63, 185, 80, 0.4); }
+.btn:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 10px 25px -10px var(--vio); }
+
+.term {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 18px;
+  box-shadow: 0 30px 80px -30px #000, 0 0 0 1px rgba(163, 113, 247, 0.2);
+  overflow: hidden; transform: perspective(1000px) rotateY(-4deg) rotateX(2deg); transition: transform 0.4s;
+}
+.term:hover { transform: none; }
+.th {
+  display: flex; align-items: center; gap: 8px; padding: 14px 18px;
+  border-bottom: 1px solid var(--line); font: 400 13px 'JetBrains Mono', monospace; color: var(--mute);
+  background: rgba(22, 27, 34, 0.8);
+}
+.th i { width: 11px; height: 11px; border-radius: 50%; }
+.th i:nth-child(1) { background: var(--rose); }
+.th i:nth-child(2) { background: #f1e05a; }
+.th i:nth-child(3) { background: var(--pass); }
+.th span { margin-left: 10px; color: var(--text); }
+#tb { padding: 20px 20px 10px; font: 400 13.5px/2 'JetBrains Mono', monospace; min-height: 290px; }
+.ln { display: flex; gap: 12px; animation: in 0.3s both; }
+@keyframes in { from { opacity: 0; transform: translateX(-8px); } }
+.ln .s { width: 54px; font-weight: 600; color: var(--mute); }
+.ln.ok .s { color: var(--pass); }
+.spin { display: inline-block; animation: sp 1s linear infinite; }
+@keyframes sp { to { transform: rotate(360deg); } }
+.sum { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--line); color: var(--pass); font-weight: 600; }
+.tf { display: flex; justify-content: flex-end; padding: 0 18px 16px; }
+.tf .btn { padding: 8px 16px; font-size: 13.5px; }
+
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; padding-top: 20px; }
+.stat { border-left: 3px solid var(--accent); padding-left: 18px; background: rgba(22, 27, 34, 0.4); border-radius: 0 12px 12px 0; padding-top: 8px; padding-bottom: 8px; }
+.stat b { display: block; font-size: clamp(34px, 5vw, 52px); line-height: 1; letter-spacing: -0.04em; color: var(--text); }
+.stat span { color: var(--mute); font-size: 15px; margin-top: 4px; display: block; }
+
+.about { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: start; }
+.about-text p { color: var(--mute); font-size: 19px; line-height: 1.65; }
+.about-text p + p { margin-top: 18px; }
+.highlight-box {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 28px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.highlight-item { display: flex; gap: 16px; align-items: flex-start; }
+.highlight-icon { width: 42px; height: 42px; border-radius: 12px; background: rgba(163, 113, 247, 0.15); color: var(--vio); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+.highlight-info h4 { font-size: 17px; font-weight: 700; color: var(--text); }
+.highlight-info p { font-size: 14.5px; color: var(--mute); margin-top: 2px; }
+
+.tl { position: relative; border-left: 2px solid var(--line); margin-left: 8px; display: grid; gap: 26px; }
+.item {
+  position: relative; margin-left: 28px;
+  background: linear-gradient(160deg, var(--panel), rgba(22, 27, 34, 0.6));
+  border: 1px solid var(--line); border-radius: 18px; padding: 26px 28px;
+  display: grid; grid-template-columns: 1fr auto; gap: 10px 24px;
+  transition: transform 0.3s, border-color 0.3s;
+}
+.item::before {
+  content: ""; position: absolute; left: -37px; top: 32px; width: 14px; height: 14px;
+  border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 5px var(--ink), 0 0 16px var(--accent);
+}
+.item:hover { transform: translateX(8px); border-color: var(--accent); }
+.item h3 { font-size: 22px; letter-spacing: -0.02em; color: var(--text); }
+.item small { color: var(--vio); font: 600 13px 'JetBrains Mono', monospace; }
+.item p { color: var(--mute); grid-column: 1; font-size: 16px; margin-top: 4px; }
+.item ul { grid-column: 1; margin-left: 18px; color: var(--mute); font-size: 15.5px; margin-top: 8px; display: grid; gap: 6px; }
+.metric {
+  grid-column: 2; grid-row: 1 / 4; align-self: center; text-align: right;
+  font-size: 38px; font-weight: 800; color: var(--pass); letter-spacing: -0.04em; line-height: 1;
+}
+.metric em { display: block; font: 400 12px 'Bricolage Grotesque'; color: var(--mute); letter-spacing: 0; margin-top: 4px; font-style: normal; }
+.role { border-color: var(--accent); background: linear-gradient(160deg, #1c2333, var(--panel)); }
+
+.projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.project-card {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 26px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+.project-card:hover { transform: translateY(-6px); border-color: var(--accent); box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5); }
+.project-card h3 { font-size: 20px; margin-bottom: 8px; letter-spacing: -0.01em; }
+.project-tech { font: 600 12.5px 'JetBrains Mono', monospace; color: var(--cyan); margin-bottom: 14px; }
+.project-card p { color: var(--mute); font-size: 15px; line-height: 1.6; margin-bottom: 20px; }
+.project-badge {
+  display: inline-block; padding: 4px 12px; border-radius: 999px;
+  background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.25);
+  color: var(--cyan); font-size: 13px; font-weight: 600; align-self: flex-start;
+}
+
+.sk { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.sk div { background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 26px; }
+.sk h3 { margin-bottom: 16px; font-size: 20px; color: var(--text); border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+.chip {
+  display: inline-block; margin: 0 6px 8px 0; padding: 6px 14px; border-radius: 999px;
+  border: 1px solid var(--line); font-size: 14.5px; color: var(--mute); transition: all 0.25s; cursor: default;
+  background: rgba(13, 17, 23, 0.5);
+}
+.chip:hover { background: var(--vio); color: #fff; border-color: var(--vio); transform: translateY(-3px) rotate(-1deg); }
+
+.edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.edu-card {
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 28px;
+}
+.edu-card h3 { font-size: 21px; margin-bottom: 4px; }
+.edu-card p { color: var(--mute); font-size: 15px; }
+.edu-card b { font-size: 36px; letter-spacing: -0.04em; color: var(--pass); }
+
+.contact { text-align: center; padding-bottom: 60px; }
+.contact h2 { font-size: clamp(34px, 5.5vw, 68px); }
+.mail { font-size: clamp(20px, 3.4vw, 34px); font-weight: 700; text-decoration: none; border-bottom: 2px solid var(--accent); transition: color 0.2s, border-color 0.2s; color: var(--text); }
+.mail:hover { color: var(--pass); border-color: var(--pass); }
+.contact .row { margin-top: 32px; display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+
+footer { position: relative; z-index: 1; text-align: center; color: var(--mute); font-size: 14.5px; padding: 24px 24px 40px; border-top: 1px solid var(--line); margin-top: 40px; }
+
+.rv { opacity: 0; transform: translateY(26px); transition: opacity 0.7s, transform 0.7s; }
+.rv.on { opacity: 1; transform: none; }
+
+@media (max-width: 860px) {
+  .hero, .about, .sk, .projects-grid, .edu-grid { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: 1fr 1fr; }
+  .term { transform: none; }
+  nav { padding: 14px 18px; }
+  nav b { font-size: 17px; }
+  nav div { gap: 14px; }
+  nav a { font-size: 14px; }
+  .item { grid-template-columns: 1fr; }
+  .metric { grid-column: 1; grid-row: auto; text-align: left; margin-top: 8px; }
+  .mail { overflow-wrap: anywhere; font-size: clamp(17px, 5vw, 32px); }
+  .hero .btn, .contact .btn { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  .rv { opacity: 1; transform: none; }
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<div id="glow"></div>
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+
+<nav>
+  <b>Aziz <span>Ullah</span></b>
+  <div>
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<main>
+  <!-- Hero Section -->
+  <section class="wrap hero" id="top">
+    <div>
+      <div class="badge-tag">Available for Senior Python & Backend Roles</div>
+      <h1>I build resilient data pipelines & AI backends <span>engineered for scale.</span></h1>
+      <p>Senior Python Backend Developer with 5 years of experience architecting high-throughput web scrapers, FastAPI REST services, and LLM-assisted data extraction engines.</p>
+      <div class="btn-group">
+        <a class="btn main" href="#projects">Explore Projects</a>
+        <a class="btn" href="Aziz_Ullah_Resume.pdf" download="Aziz_Ullah_Resume.pdf">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download CV
+        </a>
+        <a class="btn" href="#contact">Get in Touch</a>
+      </div>
+    </div>
+    
+    <!-- Animated Terminal Widget -->
+    <div class="term" aria-label="Simulated backend data pipeline run">
+      <div class="th"><i></i><i></i><i></i><span>python data_pipeline.py --mode=live</span></div>
+      <div id="tb" aria-live="off"></div>
+      <div class="tf"><button class="btn" id="rerun" type="button">Re-run Pipeline</button></div>
+    </div>
+  </section>
+
+  <!-- Live Stats Section -->
+  <section class="wrap" style="padding-top:10px">
+    <div class="stats rv">
+      <div class="stat"><b data-n="5" data-s="+">0</b><span>Years Python Experience</span></div>
+      <div class="stat"><b data-n="90" data-s="%">0</b><span>Manual Effort Reduced</span></div>
+      <div class="stat"><b data-n="60" data-s="%">0</b><span>Faster Scraper Setup</span></div>
+      <div class="stat"><b data-n="100" data-s="%">0</b><span>Data Extraction Reliability</span></div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="wrap" id="about">
+    <h2 class="rv">Clean Architecture & Intelligent Automation</h2>
+    <div class="about rv">
+      <div class="about-text">
+        <p>I specialize in Python backend engineering with deep hands-on expertise in extracting structured data from complex dynamic websites and integrating modern AI models (OpenAI API, Anthropic Claude) into production workflows.</p>
+        <p>Over the past 5 years, I've designed resilient scraping architectures equipped with automatic retries, proxy rotation, exponential backoff, and Pandas ETL pipelines that transform unstructured data into clean, validated JSON schemas for high-concurrency database storage.</p>
+      </div>
+      <div class="highlight-box">
+        <div class="highlight-item">
+          <div class="highlight-icon">⚡</div>
+          <div class="highlight-info">
+            <h4>FastAPI & Async Backends</h4>
+            <p>High-concurrency RESTful APIs with Pydantic request validation and low latency.</p>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-icon">🤖</div>
+          <div class="highlight-info">
+            <h4>AI & LLM Integration</h4>
+            <p>OpenAI & Claude API function calling for parsing complex non-standard layouts.</p>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-icon">🛡️</div>
+          <div class="highlight-info">
+            <h4>Resilient Web Scraping</h4>
+            <p>Selenium, BeautifulSoup & Puppeteer with anti-blocking proxy rotation & rate limiting.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section class="wrap" id="experience">
+    <h2 class="rv">Professional Experience</h2>
+    <div class="tl">
+      <article class="item rv role">
+        <h3>Senior Python & AI Backend Developer — Smart Forum</h3>
+        <small>Jan 2022 – Present &middot; Remote / Pakistan</small>
+        <ul>
+          <li>Architected scalable web scraping systems extracting structured data from JavaScript-heavy, dynamic target sites.</li>
+          <li>Integrated OpenAI & Anthropic Claude APIs with custom JSON schema validators, vastly improving parsing accuracy.</li>
+          <li>Engineered high-throughput RESTful APIs using FastAPI and Flask to serve structured data to downstream applications.</li>
+          <li>Built end-to-end Pandas data processing pipelines for cleaning, deduplication, schema normalization, and database loading.</li>
+          <li>Implemented automated proxy rotation, exponential backoff, and monitoring to maintain maximum scraper uptime.</li>
+        </ul>
+        <div class="metric">90%<em>effort automated</em></div>
+      </article>
+
+      <article class="item rv">
+        <h3>Python Developer (Backend & Automation) — Software Consultant</h3>
+        <small>Jan 2020 – Dec 2021 &middot; Consultant</small>
+        <ul>
+          <li>Developed custom Python scripts for client data collection, automated PDF/CSV report generation, and web extraction.</li>
+          <li>Created REST API endpoints using Flask supporting multi-tenant client data ingestion and CRUD operations.</li>
+          <li>Normalized and transformed messy CSV, JSON, and XML data exports into structured MySQL and SQLite database schemas.</li>
+          <li>Scheduled background cron tasks with robust error logging and automated alert mechanisms.</li>
+        </ul>
+        <div class="metric">2+<em>years consulting</em></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section class="wrap" id="projects">
+    <h2 class="rv">Featured Projects</h2>
+    <div class="projects-grid rv">
+      <div class="project-card">
+        <div>
+          <h3>AI-Enhanced Modular Web Scraping Framework</h3>
+          <div class="project-tech">Python &middot; Selenium &middot; OpenAI API &middot; FastAPI &middot; Pandas</div>
+          <p>Built a modular scraping engine supporting authentication, paginated navigation, and structured JSON parsing via OpenAI function calling. Dramatically shortened scraper creation times.</p>
+        </div>
+        <div class="project-badge">60% Setup Time Saved</div>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <h3>FastAPI Data Delivery REST API</h3>
+          <div class="project-tech">Python &middot; FastAPI &middot; Pydantic &middot; PostgreSQL &middot; Swagger</div>
+          <p>Designed and deployed lightweight REST API services with Pydantic request validation and async handlers for high concurrency and low-latency JSON delivery.</p>
+        </div>
+        <div class="project-badge">Low-Latency Async</div>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <h3>Automated Data Processing & ETL Pipeline</h3>
+          <div class="project-tech">Python &middot; Pandas &middot; NumPy &middot; JSON / CSV</div>
+          <p>Developed automated Python ETL scripts using vectorized Pandas operations for cleaning and merging multi-source datasets, replacing manual spreadsheet workflows.</p>
+        </div>
+        <div class="project-badge">Vectorized ETL</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Toolkit Section -->
+  <section class="wrap" id="skills">
+    <h2 class="rv">Technical Toolkit</h2>
+    <div class="sk rv">
+      <div>
+        <h3>Core & Frameworks</h3>
+        <span class="chip">Python 3.x</span>
+        <span class="chip">FastAPI</span>
+        <span class="chip">Flask</span>
+        <span class="chip">RESTful API Design</span>
+        <span class="chip">Webhooks</span>
+        <span class="chip">JSON APIs</span>
+        <span class="chip">SQL</span>
+      </div>
+      <div>
+        <h3>Scraping & AI API</h3>
+        <span class="chip">Selenium</span>
+        <span class="chip">BeautifulSoup</span>
+        <span class="chip">Puppeteer</span>
+        <span class="chip">Async Scraping</span>
+        <span class="chip">Proxy Rotation</span>
+        <span class="chip">OpenAI API</span>
+        <span class="chip">Claude API</span>
+        <span class="chip">Function Calling</span>
+        <span class="chip">Prompt Engineering</span>
+      </div>
+      <div>
+        <h3>Data & Infrastructure</h3>
+        <span class="chip">Pandas</span>
+        <span class="chip">PostgreSQL</span>
+        <span class="chip">SQLite</span>
+        <span class="chip">MySQL</span>
+        <span class="chip">Redis</span>
+        <span class="chip">Docker</span>
+        <span class="chip">Git / GitHub</span>
+        <span class="chip">Linux / Bash</span>
+        <span class="chip">PyTest</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education Section -->
+  <section class="wrap">
+    <h2 class="rv">Education & Languages</h2>
+    <div class="edu-grid rv">
+      <div class="edu-card">
+        <div>
+          <h3>BS in Information Technology (BS IT)</h3>
+          <p>University of Malakand, Pakistan &middot; 2015 – 2019</p>
+        </div>
+        <div><b>3.12</b> / 4.0 GPA</div>
+      </div>
+      <div class="edu-card">
+        <div>
+          <h3>Languages</h3>
+          <p style="margin-top:6px; font-size:16px;">
+            • English (Professional Working)<br>
+            • Urdu (Native)<br>
+            • Pashto (Native)
+          </p>
+        </div>
+        <div style="font-size:32px;">🌐</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="wrap contact" id="contact">
+    <h2 class="rv">Let's build something together</h2>
+    <p class="rv" style="color:var(--mute); margin-bottom: 24px; font-size:18px;">Have a complex data pipeline, web scraper, or Python backend to build?</p>
+    <a class="mail rv" href="mailto:aziz.khan40343@gmail.com">aziz.khan40343@gmail.com</a>
+    <div class="row rv">
+      <a class="btn main" href="https://github.com/aziz-ullah" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub Profile
+      </a>
+      <a class="btn" href="https://linkedin.com/in/aziz-ullah-bb477b253" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.7a1.63 1.63 0 1 0 0 3.26 1.63 1.63 0 0 0 0-3.26z"/></svg>
+        LinkedIn
+      </a>
+      <button class="btn" id="copy" type="button">Copy Email</button>
+    </div>
+  </section>
+</main>
+
+<footer>
+  &copy; <span id="yr"></span> Aziz Ullah &middot; Senior Python Developer &middot; Dir (Lower), Pakistan
+</footer>
+
+<script>
+const rm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const sleep = ms => new Promise(r => setTimeout(r, rm ? 0 : ms));
+
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// Scroll progress bar
+const bar = document.getElementById('bar');
+addEventListener('scroll', () => {
+  bar.style.width = (scrollY / (document.body.scrollHeight - innerHeight) * 100) + '%';
+}, { passive: true });
+
+// Mouse glow follower
+const glow = document.getElementById('glow');
+addEventListener('pointermove', e => {
+  glow.style.left = e.clientX + 'px';
+  glow.style.top = e.clientY + 'px';
+});
+
+// Intersection Observer for scroll animations & counter
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('on');
+    e.target.querySelectorAll('[data-n]').forEach(c => {
+      const target = +c.dataset.n;
+      const suffix = c.dataset.s || '';
+      const t0 = performance.now();
+      (function frame(now) {
+        const progress = Math.min((now - t0) / 1400, 1);
+        c.textContent = Math.round(target * (1 - Math.pow(1 - progress, 3))) + suffix;
+        if (progress < 1 && !rm) requestAnimationFrame(frame);
+      })(t0);
+      c.textContent = target + suffix;
+    });
+    io.unobserve(e.target);
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+// Interactive Terminal Pipeline simulation
+const pipelineSteps = [
+  ['ScraperEngine', 'dynamic JS rendering & proxy rotation active'],
+  ['OpenAI_LLM', 'structured JSON extraction & function calling validated'],
+  ['FastAPI_Service', 'REST async endpoints responding in 12ms'],
+  ['Pandas_ETL', 'cleaned & normalized 250,000 scraped records'],
+  ['PostgreSQL_DB', 'schema validation passed & 0 errors logged']
+];
+
+const tb = document.getElementById('tb');
+const rerunBtn = document.getElementById('rerun');
+let running = false;
+
+async function runPipeline() {
+  if (running) return;
+  running = true;
+  rerunBtn.disabled = true;
+  tb.innerHTML = '';
+  
+  for (const [moduleName, statusText] of pipelineSteps) {
+    const line = document.createElement('div');
+    line.className = 'ln';
+    line.innerHTML = `<span class="s"><span class="spin">◐</span></span><span>${moduleName} <span style="color:var(--mute)">${statusText}</span></span>`;
+    tb.appendChild(line);
+    await sleep(700);
+    line.classList.add('ok');
+    line.querySelector('.s').textContent = 'PASS';
+  }
+  
+  const summary = document.createElement('div');
+  summary.className = 'ln sum';
+  summary.textContent = '⚡ 5 data pipelines verified. All services operational.';
+  tb.appendChild(summary);
+  
+  running = false;
+  rerunBtn.disabled = false;
+}
+
+rerunBtn.onclick = runPipeline;
+setTimeout(runPipeline, 400);
+
+// Copy email button feature
+document.getElementById('copy').onclick = async e => {
+  try {
+    await navigator.clipboard.writeText('aziz.khan40343@gmail.com');
+    e.target.textContent = 'Copied!';
+    setTimeout(() => e.target.textContent = 'Copy Email', 2000);
+  } catch (_) {
+    e.target.textContent = 'aziz.khan40343@gmail.com';
+  }
+};
+</script>
+</body>
+</html>
